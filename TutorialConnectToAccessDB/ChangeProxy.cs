@@ -1,6 +1,7 @@
 ﻿using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -16,22 +17,27 @@ namespace TutorialConnectToAccessDB
         static bool settingsReturn, refreshReturn;
         public static void SetSockEntireComputer(string proxy)
         {
-            RegistryKey registry = Registry.CurrentUser.OpenSubKey("Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings", true);
-            registry.SetValue("ProxyEnable", 1);
-            registry.SetValue("ProxyServer", "socks=" + proxy);
-            // These lines implement the Interface in the beginning of program 
-            // They cause the OS to refresh the settings, causing IP to realy update
-            settingsReturn = InternetSetOption(IntPtr.Zero, INTERNET_OPTION_SETTINGS_CHANGED, IntPtr.Zero, 0);
-            refreshReturn = InternetSetOption(IntPtr.Zero, INTERNET_OPTION_REFRESH, IntPtr.Zero, 0);
+            ProcessStartInfo psi = new ProcessStartInfo("setSockEntireComputer.exe", proxy)
+            {
+                CreateNoWindow = true,
+                WindowStyle = ProcessWindowStyle.Hidden,
+                UseShellExecute = false,
+                RedirectStandardOutput = true
+            };
+            var process = System.Diagnostics.Process.Start(psi);
+            process.WaitForExit();
         }
         public static void ResetProxySockEntireComputer()
         {
-            RegistryKey registry = Registry.CurrentUser.OpenSubKey("Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings", true);
-            registry.SetValue("ProxyEnable", 0);
-            // These lines implement the Interface in the beginning of program 
-            // They cause the OS to refresh the settings, causing IP to realy update
-            settingsReturn = InternetSetOption(IntPtr.Zero, INTERNET_OPTION_SETTINGS_CHANGED, IntPtr.Zero, 0);
-            refreshReturn = InternetSetOption(IntPtr.Zero, INTERNET_OPTION_REFRESH, IntPtr.Zero, 0);
+            ProcessStartInfo psi = new ProcessStartInfo("resetProxySockEntireComputer.exe")
+            {
+                CreateNoWindow = true,
+                WindowStyle = ProcessWindowStyle.Hidden,
+                UseShellExecute = false,
+                RedirectStandardOutput = true
+            };
+            var process = System.Diagnostics.Process.Start(psi);
+            process.WaitForExit();
         }
 
 

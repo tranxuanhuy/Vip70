@@ -37,8 +37,9 @@ namespace TutorialConnectToAccessDB
         //sqlcommand with where condition match country or state
         private bool stateSelected = false;
         private TcpForwarderSlim tcpForward;
-        private bool useProxifier;
+        private bool useProxifier=false;
         private bool systemTime=false;
+        private string ProxifierPath;
         public FormMain()
         {
             //create connection using parameter from mdsaputra.udl
@@ -107,7 +108,7 @@ namespace TutorialConnectToAccessDB
 
         private void loadProxyFileDownloadFromWeb()
         {
-            Stream myStream = null;
+            
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
 
             openFileDialog1.InitialDirectory = "c:\\";
@@ -196,6 +197,60 @@ namespace TutorialConnectToAccessDB
 
     private void FormMain_Load(object sender, EventArgs e)
     {
+        //mo firefox de nghe ket noi autoit
+        bool firefoxExist=false;
+        foreach (System.Diagnostics.Process myProc in System.Diagnostics.Process.GetProcesses())
+        {
+            if (myProc.ProcessName == "firefox")
+            {
+                firefoxExist = true;
+            }
+        }
+        if (!firefoxExist)
+        {
+            var proc = new Process
+            {
+                StartInfo = new ProcessStartInfo
+                {
+                    FileName = System.Environment.GetFolderPath(
+            System.Environment.SpecialFolder.ProgramFiles) + @"\Mozilla Firefox\firefox.exe",
+                    Arguments = "https://addons.mozilla.org/vi/firefox/addon/mozrepl/",
+                    UseShellExecute = false,
+                    RedirectStandardOutput = true,
+                    CreateNoWindow = true,
+
+                    //WorkingDirectory = @"C:\MyAndroidApp\"
+                }
+            };
+
+            proc.Start(); 
+        }
+
+        //config lan dau: chon duong dan dden vip72
+        if (!File.Exists("config"))
+        {
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+
+            openFileDialog1.InitialDirectory = "c:\\";
+            openFileDialog1.Filter = "exe files (*.exe)|Proxifier.exe";
+            openFileDialog1.FilterIndex = 2;
+            openFileDialog1.RestoreDirectory = true;
+            openFileDialog1.Title = "chon duong dan den file Proxifier.exe";
+
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                using (System.IO.StreamWriter file = new System.IO.StreamWriter("config"))
+                {
+                    ProxifierPath = openFileDialog1.FileName;
+                    file.Write(ProxifierPath);
+                }
+
+            } 
+        }
+        else
+        {
+            ProxifierPath = File.ReadLines("config").First();
+        }
         //load combobox
         comboBox1.DisplayMember = "Text";
         comboBox1.ValueMember = "Value";
@@ -212,8 +267,8 @@ namespace TutorialConnectToAccessDB
         
         try
         {
-            File.Copy("demo.ppx", Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\Proxifier\Profiles\demo.ppx");
-
+            File.Copy("demo.ppx", (ProxifierPath + @"\Profiles\demo.ppx").Replace("\\Proxifier.exe", ""));
+            
         }
         catch (Exception)
         {
@@ -317,16 +372,15 @@ namespace TutorialConnectToAccessDB
 
     private void ProxifierReload(string proxy,int port)
     {
-        string filename = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)+@"\Proxifier\Profiles\demo.ppx";
-        lineChanger("<Address>" + proxy + "</Address>", filename, 20);
-        lineChanger("<Port>" + port + "</Port>", filename, 21);
+        string filename = (ProxifierPath + @"\Profiles\demo.ppx").Replace("\\Proxifier.exe","") ;
+        lineChanger("<Address>" + proxy + "</Address>", filename, 28);
+        lineChanger("<Port>" + port + "</Port>", filename, 29);
         var proc = new Process
         {
             StartInfo = new ProcessStartInfo
             {
-                FileName = System.Environment.GetFolderPath(
-        System.Environment.SpecialFolder.ProgramFiles) +@"\Proxifier\Proxifier.exe",
-                Arguments = filename,
+                FileName = ProxifierPath,
+                Arguments = string.Format("\"{0}\"", filename),
                 UseShellExecute = false,
                 RedirectStandardOutput = true,
                 CreateNoWindow = true,
@@ -403,7 +457,7 @@ namespace TutorialConnectToAccessDB
 
     }
 
-    private void dataGridView1_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+    private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
     {
         string proxy = dataGridView1.CurrentCell.Value.ToString();
         if (useProxifier)
@@ -415,7 +469,7 @@ namespace TutorialConnectToAccessDB
         {
             if (checkBox3.Checked)
             {
-                ChangeProxy.SetSockEntireComputer(proxy);
+              ChangeProxy.SetSockEntireComputer(proxy);
             }
          
             //set socks for firefox, ff can't use system sock error
@@ -437,6 +491,7 @@ namespace TutorialConnectToAccessDB
         {
             ChangeProxy.ResetTimezone();
         }
+        label4.Text = proxy;
     }
 
     private void buttonCheck5Socks_Click(object sender, EventArgs e)
@@ -497,6 +552,13 @@ else
             ChangeProxy.ResetProxySockEntireComputer(); 
         }
     }
+
+    private void button4_Click(object sender, EventArgs e)
+    {
+        ChangeProxy.SetSockEntireComputer("1.1.1.1:1");
+    }
+
+ 
 
    
         
