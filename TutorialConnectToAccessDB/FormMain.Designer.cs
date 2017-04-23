@@ -47,21 +47,20 @@
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBoxDescription = new System.Windows.Forms.TextBox();
-            this.textBoxBookName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.checkBox4 = new System.Windows.Forms.CheckBox();
             this.button4 = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonInsert
             // 
-            this.buttonInsert.Location = new System.Drawing.Point(188, 29);
+            this.buttonInsert.Location = new System.Drawing.Point(606, 7);
             this.buttonInsert.Name = "buttonInsert";
-            this.buttonInsert.Size = new System.Drawing.Size(75, 23);
+            this.buttonInsert.Size = new System.Drawing.Size(86, 23);
             this.buttonInsert.TabIndex = 4;
             this.buttonInsert.Text = "Insert";
             this.buttonInsert.UseVisualStyleBackColor = true;
@@ -90,35 +89,41 @@
             // 
             this.id.HeaderText = "IP";
             this.id.Name = "id";
+            this.id.ReadOnly = true;
             // 
             // name
             // 
             this.name.HeaderText = "country";
             this.name.Name = "name";
+            this.name.ReadOnly = true;
             // 
             // description
             // 
             this.description.HeaderText = "state";
             this.description.Name = "description";
+            this.description.ReadOnly = true;
             // 
             // city
             // 
             this.city.HeaderText = "city";
             this.city.Name = "city";
+            this.city.ReadOnly = true;
             // 
             // websource
             // 
             this.websource.HeaderText = "websource";
             this.websource.Name = "websource";
+            this.websource.ReadOnly = true;
             // 
             // GMT
             // 
             this.GMT.HeaderText = "GMT";
             this.GMT.Name = "GMT";
+            this.GMT.ReadOnly = true;
             // 
             // buttonCheck5Socks
             // 
-            this.buttonCheck5Socks.Location = new System.Drawing.Point(258, 58);
+            this.buttonCheck5Socks.Location = new System.Drawing.Point(330, 29);
             this.buttonCheck5Socks.Name = "buttonCheck5Socks";
             this.buttonCheck5Socks.Size = new System.Drawing.Size(86, 23);
             this.buttonCheck5Socks.TabIndex = 6;
@@ -128,7 +133,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(188, 2);
+            this.button1.Location = new System.Drawing.Point(606, 35);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(86, 23);
             this.button1.TabIndex = 7;
@@ -144,11 +149,11 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(309, 9);
+            this.label3.Location = new System.Drawing.Point(13, 60);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(35, 13);
+            this.label3.Size = new System.Drawing.Size(44, 13);
             this.label3.TabIndex = 8;
-            this.label3.Text = "label3";
+            this.label3.Text = "status...";
             // 
             // listView1
             // 
@@ -182,7 +187,7 @@
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(351, 29);
+            this.checkBox1.Location = new System.Drawing.Point(150, 31);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(83, 17);
             this.checkBox1.TabIndex = 12;
@@ -193,7 +198,7 @@
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(452, 4);
+            this.comboBox1.Location = new System.Drawing.Point(16, 31);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(121, 21);
             this.comboBox1.TabIndex = 13;
@@ -211,39 +216,25 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 34);
+            this.label2.Location = new System.Drawing.Point(147, 12);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(60, 13);
+            this.label2.Size = new System.Drawing.Size(79, 13);
             this.label2.TabIndex = 1;
-            this.label2.Text = "Description";
-            // 
-            // textBoxDescription
-            // 
-            this.textBoxDescription.Location = new System.Drawing.Point(82, 31);
-            this.textBoxDescription.Name = "textBoxDescription";
-            this.textBoxDescription.Size = new System.Drawing.Size(100, 20);
-            this.textBoxDescription.TabIndex = 3;
-            // 
-            // textBoxBookName
-            // 
-            this.textBoxBookName.Location = new System.Drawing.Point(82, 9);
-            this.textBoxBookName.Name = "textBoxBookName";
-            this.textBoxBookName.Size = new System.Drawing.Size(100, 20);
-            this.textBoxBookName.TabIndex = 2;
+            this.label2.Text = "Running config";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(13, 12);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(63, 13);
+            this.label1.Size = new System.Drawing.Size(54, 13);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Book Name";
+            this.label1.Text = "Add proxy";
             // 
             // checkBox2
             // 
             this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(351, 52);
+            this.checkBox2.Location = new System.Drawing.Point(150, 54);
             this.checkBox2.Name = "checkBox2";
             this.checkBox2.Size = new System.Drawing.Size(80, 17);
             this.checkBox2.TabIndex = 15;
@@ -254,7 +245,7 @@
             // checkBox3
             // 
             this.checkBox3.AutoSize = true;
-            this.checkBox3.Location = new System.Drawing.Point(440, 35);
+            this.checkBox3.Location = new System.Drawing.Point(239, 31);
             this.checkBox3.Name = "checkBox3";
             this.checkBox3.Size = new System.Drawing.Size(75, 17);
             this.checkBox3.TabIndex = 16;
@@ -265,17 +256,17 @@
             // checkBox4
             // 
             this.checkBox4.AutoSize = true;
-            this.checkBox4.Location = new System.Drawing.Point(440, 58);
+            this.checkBox4.Location = new System.Drawing.Point(239, 54);
             this.checkBox4.Name = "checkBox4";
-            this.checkBox4.Size = new System.Drawing.Size(32, 17);
+            this.checkBox4.Size = new System.Drawing.Size(54, 17);
             this.checkBox4.TabIndex = 17;
-            this.checkBox4.Text = "ff";
+            this.checkBox4.Text = "firefox";
             this.checkBox4.UseVisualStyleBackColor = true;
             this.checkBox4.CheckedChanged += new System.EventHandler(this.checkBox4_CheckedChanged);
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(537, 60);
+            this.button4.Location = new System.Drawing.Point(606, 60);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(86, 23);
             this.button4.TabIndex = 18;
@@ -283,11 +274,21 @@
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(327, 12);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(75, 13);
+            this.label5.TabIndex = 19;
+            this.label5.Text = "Check module";
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(704, 363);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.checkBox4);
             this.Controls.Add(this.checkBox3);
@@ -303,12 +304,10 @@
             this.Controls.Add(this.buttonCheck5Socks);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.buttonInsert);
-            this.Controls.Add(this.textBoxDescription);
-            this.Controls.Add(this.textBoxBookName);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "FormMain";
-            this.Text = "mdsaputra.wordpress.com";
+            this.Text = "Vip70";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormMain_FormClosing);
             this.Load += new System.EventHandler(this.FormMain_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
@@ -336,8 +335,6 @@
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBoxDescription;
-        private System.Windows.Forms.TextBox textBoxBookName;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridViewTextBoxColumn websource;
         private System.Windows.Forms.CheckBox checkBox2;
@@ -345,6 +342,7 @@
         private System.Windows.Forms.CheckBox checkBox3;
         private System.Windows.Forms.CheckBox checkBox4;
         private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Label label5;
 
     }
 }
