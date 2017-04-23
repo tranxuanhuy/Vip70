@@ -122,15 +122,29 @@ new System.IO.StreamReader(filename);
             int offset = counter;
             string info = File.ReadLines(filename).Skip(offset + 7).First() + File.ReadLines(filename).Skip(offset + 16).First() + File.ReadLines(filename).Skip(offset + 23).First() +"\t";
             //add time GMT
-            if (File.ReadLines(filename).Skip(offset + 96).Contains("GMT"))
+            counter = 0;
+            file =
+new System.IO.StreamReader(filename);
+
+            while ((line = file.ReadLine()) != null)
             {
-                info += File.ReadLines(filename).Skip(offset + 96).First().Split('-')[1].Split(' ')[0];
+                if (line.Contains("GMT"))
+                {
+                    break;
+                }
+
+                counter++;
             }
-            else
-            {
-                info += File.ReadLines(filename).Skip(offset + 97).First().Split('-')[1].Split(' ')[0];
-    
-            }
+
+            //Console.WriteLine("Line number: {0}", counter);
+
+            file.Close();
+            offset = counter;
+            
+           
+                info += File.ReadLines(filename).Skip(offset).First().Split('-')[1].Split(' ')[0];
+
+            
             info = info.Replace("<span class=\"cont\">", "\t");
             
                 info = info.Replace("<span class=\"disabled\">", "");
